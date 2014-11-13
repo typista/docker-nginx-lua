@@ -5,7 +5,7 @@
 #ADD files/vimrc /etc/skel/.vimrc
 #ADD files/vimrc /root/.vimrc
 #RUN echo "umask 002" >> /etc/skel/.bashrc
-FROM typista/docker:base
+FROM typista/base
 
 # install LuaJIT
 RUN cd /usr/local/src && \
