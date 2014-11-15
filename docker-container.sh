@@ -9,6 +9,7 @@ else
 	FULLPATH=$(cd `dirname $0`; pwd)/`basename $0`
 	DIR=`dirname $FULLPATH`
 	REPO=`basename $DIR`
+	REPO=`echo $REPO | sed -r "s/docker\-//g"`
 	IMAGE=$USER/$REPO
 	if [ "$3" != "" ];then
     		IMAGE=$IMAGE:$1
