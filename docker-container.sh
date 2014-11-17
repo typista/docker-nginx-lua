@@ -16,6 +16,7 @@ else
 	fi
 	docker run -d --privileged --name="$__FQDN__" --hostname="$__HOSTNAME__" \
 		-p $__PORT__:80 \
+		-p 443:443 \
 		-v /var/www/:/var/www/ \
 		-v /var/log/nginx/:/var/log/nginx/ \
 		$IMAGE
