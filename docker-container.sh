@@ -12,9 +12,9 @@ else
 	REPO=`echo $REPO | sed -r "s/docker\-//g"`
 	IMAGE=$USER/$REPO
 	if [ "$3" != "" ];then
-    		IMAGE=$IMAGE:$1
+    		IMAGE=$IMAGE:$3
 	fi
-	docker run -d --privileged --name="$__FQDN__" --hostname="$__HOSTNAME__" \
+	docker run -d --privileged --restart=always --name="$__FQDN__" --hostname="$__HOSTNAME__" \
 		-p $__PORT__:80 \
 		-p 443:443 \
 		-v /var/www/:/var/www/ \
