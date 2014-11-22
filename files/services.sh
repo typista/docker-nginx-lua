@@ -36,6 +36,7 @@ if [ $ISDEFAULT -eq 0 ]; then
 	sed -ri "s/__FQDN__/$FQDN/g" $NGINX_CONF
 fi
 chown -R nginx: $LOG
+crontab /root/crontab.txt
 /etc/init.d/nginx start
 /etc/init.d/crond start
 /usr/bin/tail -f /dev/null
