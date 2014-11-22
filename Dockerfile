@@ -47,7 +47,7 @@ RUN wget https://raw.githubusercontent.com/typista/docker-nginx-lua/master/files
 	cp /root/nginx.conf /usr/local/nginx/conf/nginx.conf && \
 	chmod +x /etc/init.d/nginx && \
 	chmod +x /etc/services.sh && \
-	chmod +x /etc/start.sh
+	chmod +x /root/start.sh
 EXPOSE 80
 ENTRYPOINT /etc/services.sh
 
