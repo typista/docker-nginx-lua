@@ -1,4 +1,4 @@
 #!/bin/sh
-export TEMP=/root/ps.tmp
-ps aux > $TEMP
+export MONITOR_PS_LIST=/root/ps.tmp
+ps aux > $MONITOR_PS_LIST
 
