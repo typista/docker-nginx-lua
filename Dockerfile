@@ -1,9 +1,10 @@
 #http://qiita.com/hnakamur/items/0b72590136cece29faee
 FROM typista/base
+#FROM typista/base:0.3
 
 RUN wget https://raw.githubusercontent.com/typista/docker-nginx-lua/master/files/etc_init.d_nginx -O /root/etc_init.d_nginx && \
 	wget https://raw.githubusercontent.com/typista/docker-nginx-lua/master/files/nginx.conf -O /root/nginx.conf && \
-	wget https://raw.githubusercontent.com/typista/docker-nginx-lua/master/files/services.sh -O /root/services.sh && \
+	wget https://raw.githubusercontent.com/typista/docker-nginx-lua/master/files/entrypoint.sh -O /root/entrypoint.sh && \
 	wget https://raw.githubusercontent.com/typista/docker-nginx-lua/master/files/start.sh -O /root/start.sh && \
 	echo "/root/monitor_nginx.sh" >> /root/start.sh && \
 	wget https://raw.githubusercontent.com/typista/docker-nginx-lua/master/files/monitor_nginx.sh -O /root/monitor_nginx.sh && \
@@ -43,12 +44,11 @@ RUN wget https://raw.githubusercontent.com/typista/docker-nginx-lua/master/files
     make && \
     make install && \
 	cp /root/etc_init.d_nginx /etc/init.d/nginx && \
-	cp /root/services.sh /etc/services.sh && \
+	cp /root/entrypoint.sh /etc/entrypoint.sh && \
 	cp /root/nginx.conf /usr/local/nginx/conf/nginx.conf && \
 	chmod +x /etc/init.d/nginx && \
-	chmod +x /etc/services.sh && \
+	chmod +x /etc/entrypoint.sh && \
 	chmod +x /root/start.sh && \
 	chmod +x /root/monitor_nginx.sh
 EXPOSE 80
-ENTRYPOINT /etc/services.sh
 
