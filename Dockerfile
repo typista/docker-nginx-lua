@@ -1,15 +1,8 @@
 #http://qiita.com/hnakamur/items/0b72590136cece29faee
 FROM typista/base
-#FROM typista/base:0.3
+#FROM typista/base:0.4
 
-RUN scl enable devtoolset-2 bash && \
-	PATH=/opt/rh/devtoolset-2/root/usr/bin:$PATH && \
-	wget https://raw.githubusercontent.com/typista/docker-nginx-lua/master/files/etc_init.d_nginx -O /root/etc_init.d_nginx && \
-	wget https://raw.githubusercontent.com/typista/docker-nginx-lua/master/files/nginx.conf -O /root/nginx.conf && \
-	wget https://raw.githubusercontent.com/typista/docker-nginx-lua/master/files/entrypoint.sh -O /root/entrypoint.sh && \
-	wget https://raw.githubusercontent.com/typista/docker-nginx-lua/master/files/start.sh -O /root/start.sh && \
-	echo "/root/export/monitor_nginx.sh" >> /root/start.sh && \
-	wget https://raw.githubusercontent.com/typista/docker-nginx-lua/master/files/monitor_nginx.sh -O /root/monitor_nginx.sh && \
+RUN wget https://raw.githubusercontent.com/typista/docker-nginx-lua/master/files/entrypoint.sh -O /etc/entrypoint.sh && \
 	echo "#########################" && \
 	echo " install LuaJIT" && \
 	echo "#########################" && \
@@ -45,12 +38,6 @@ RUN scl enable devtoolset-2 bash && \
       --with-ld-opt="-Wl,-rpath,$LUAJIT_LIB" && \
     make && \
     make install && \
-	cp /root/etc_init.d_nginx /etc/init.d/nginx && \
-	cp /root/entrypoint.sh /etc/entrypoint.sh && \
-	cp /root/nginx.conf /usr/local/nginx/conf/nginx.conf && \
-	chmod +x /etc/init.d/nginx && \
-	chmod +x /etc/entrypoint.sh && \
-	chmod +x /root/start.sh && \
-	chmod +x /root/monitor_nginx.sh
+	chmod +x /etc/entrypoint.sh
 #EXPOSE 80
 

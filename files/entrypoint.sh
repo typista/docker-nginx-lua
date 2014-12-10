@@ -1,47 +1,18 @@
 #!/bin/bash
-# mount:/var/www
+REPO=docker-lua
+export URL_GIT=https://raw.githubusercontent.com/typista/$REPO/master/files
 LOCALTIME=/etc/localtime
 if [ ! -L $LOCALTIME ]; then
-  rm $LOCALTIME
-  ln -s /usr/share/zoneinfo/Asia/Tokyo $LOCALTIME
+	rm $LOCALTIME
+	ln -s /usr/share/zoneinfo/Asia/Tokyo $LOCALTIME
 fi
-
-HOSTNAME=`hostname`
-FQDN=`echo $HOSTNAME | sed -r "s/_/\./g"`
-ROOT=/var/www/$HOSTNAME
-HTML=$ROOT/html
-if [ ! -e $HTML ]; then
-	mkdir -p $HTML
+EXEC1ST=/root/export/exec1st.sh
+if [ ! -f $EXEC1ST ];then
+	wget $URL_GIT/exec1st.sh -O $EXEC1ST
 fi
-LINK=/usr/share/nginx/html
-if [ ! -L $LINK ]; then
-	rm -rf $LINK
-	ln -s $HTML $LINK
+if [ ! -x $EXEC1ST ];then
+	chmod +x $EXEC1ST
 fi
-chown -R nginx: $ROOT
-
-# mount:/var/log/nginx
-LOG=/var/log/nginx/$HOSTNAME
-NGINX=/usr/local/nginx
-if [ ! -e $LOG ]; then
-	mkdir -p $LOG
-	mkdir -p $NGINX/conf.d
-fi
-NGINX_CONF=$NGINX/conf/nginx.conf
-PROCNUM=`grep processor /proc/cpuinfo | wc -l`
-ISDEFAULT=`grep $HOSTNAME $NGINX_CONF | wc -l`
-if [ $ISDEFAULT -eq 0 ]; then
-	sed -ri "s/__PROCNUM__/$PROCNUM/g" $NGINX_CONF
-	sed -ri "s/__HOSTNAME__/$HOSTNAME/g" $NGINX_CONF
-	sed -ri "s/__FQDN__/$FQDN/g" $NGINX_CONF
-fi
-MONITOR_NGINX=/root/export/monitor_nginx.sh
-if [ ! -f $MONITOR_NGINX ]; then
-	cp /root/monitor_nginx.sh $MONITOR_NGINX
-	chmod +x $MONITOR_NGINX
-fi
-chown -R nginx: $LOG
-crontab /root/crontab.txt
-/etc/init.d/nginx start
+$EXEC1ST
 /etc/init.d/crond start
 /usr/bin/tail -f /dev/null
