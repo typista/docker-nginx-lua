@@ -2,7 +2,9 @@
 FROM typista/base
 #FROM typista/base:0.3
 
-RUN wget https://raw.githubusercontent.com/typista/docker-nginx-lua/master/files/etc_init.d_nginx -O /root/etc_init.d_nginx && \
+RUN scl enable devtoolset-2 bash && \
+	PATH=/opt/rh/devtoolset-2/root/usr/bin:$PATH && \
+	wget https://raw.githubusercontent.com/typista/docker-nginx-lua/master/files/etc_init.d_nginx -O /root/etc_init.d_nginx && \
 	wget https://raw.githubusercontent.com/typista/docker-nginx-lua/master/files/nginx.conf -O /root/nginx.conf && \
 	wget https://raw.githubusercontent.com/typista/docker-nginx-lua/master/files/entrypoint.sh -O /root/entrypoint.sh && \
 	wget https://raw.githubusercontent.com/typista/docker-nginx-lua/master/files/start.sh -O /root/start.sh && \
