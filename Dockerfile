@@ -50,5 +50,5 @@ RUN wget https://raw.githubusercontent.com/typista/docker-nginx-lua/master/files
 	chmod +x /etc/entrypoint.sh && \
 	chmod +x /root/start.sh && \
 	chmod +x /root/monitor_nginx.sh
-EXPOSE 80
+#EXPOSE 80
 
