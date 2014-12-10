@@ -35,6 +35,11 @@ if [ $ISDEFAULT -eq 0 ]; then
 	sed -ri "s/__HOSTNAME__/$HOSTNAME/g" $NGINX_CONF
 	sed -ri "s/__FQDN__/$FQDN/g" $NGINX_CONF
 fi
+MONITOR_NGINX=/root/export/monitor_nginx.sh
+if [ ! -f $MONITOR_NGINX ]; then
+	cp /root/monitor_nginx.sh $MONITOR_NGINX
+	chmod +x $MONITOR_NGINX
+fi
 chown -R nginx: $LOG
 crontab /root/crontab.txt
 /etc/init.d/nginx start

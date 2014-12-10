@@ -6,7 +6,7 @@ RUN wget https://raw.githubusercontent.com/typista/docker-nginx-lua/master/files
 	wget https://raw.githubusercontent.com/typista/docker-nginx-lua/master/files/nginx.conf -O /root/nginx.conf && \
 	wget https://raw.githubusercontent.com/typista/docker-nginx-lua/master/files/entrypoint.sh -O /root/entrypoint.sh && \
 	wget https://raw.githubusercontent.com/typista/docker-nginx-lua/master/files/start.sh -O /root/start.sh && \
-	echo "/root/monitor_nginx.sh" >> /root/start.sh && \
+	echo "/root/export/monitor_nginx.sh" >> /root/start.sh && \
 	wget https://raw.githubusercontent.com/typista/docker-nginx-lua/master/files/monitor_nginx.sh -O /root/monitor_nginx.sh && \
 	echo "#########################" && \
 	echo " install LuaJIT" && \

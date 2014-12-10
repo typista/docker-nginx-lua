@@ -20,6 +20,7 @@ else
 		-v /var/log/nginx/:/var/log/nginx/ \
 		-v ${PWD}/export/conf/:/usr/local/nginx/conf/ \
 		-v ${PWD}/export/conf.d/:/usr/local/nginx/conf.d/ \
+		-v ${PWD}/export/root/:/root/export/ \
 		$IMAGE
 
 	DIR_CONTAINER=dst/$__FQDN__
