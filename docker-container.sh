@@ -16,9 +16,10 @@ else
 	fi
 	docker run -d --privileged --restart=always --name="$__FQDN__" --hostname="$__HOSTNAME__" \
 		-p $__PORT__:80 \
-		-p 443:443 \
 		-v /var/www/:/var/www/ \
 		-v /var/log/nginx/:/var/log/nginx/ \
+		-v ${PWD}/export/conf/:/usr/local/nginx/conf/ \
+		-v ${PWD}/export/conf.d/:/usr/local/nginx/conf.d/ \
 		$IMAGE
 
 	DIR_CONTAINER=dst/$__FQDN__
