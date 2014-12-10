@@ -1,5 +1,5 @@
 #!/bin/bash
-REPO=docker-lua
+REPO=docker-nginx-lua
 export URL_GIT=https://raw.githubusercontent.com/typista/$REPO/master/files
 LOCALTIME=/etc/localtime
 if [ ! -L $LOCALTIME ]; then
